@@ -6,7 +6,7 @@ import {db} from "../../firebase"
 import {useDocumentOnce} from 'react-firebase-hooks/firestore'
 import {getSession,signOut,useSession} from 'next-auth/client'
 import Login from '../../components/Login'
-
+import Head from 'next/head'
 function Doc() {
     const [session] =useSession()
     if(!session) return <Login />
@@ -19,6 +19,10 @@ function Doc() {
     }
     return (
         <div>
+             <Head>
+        <title>{snapshot?.data()?.fileName} - Google Docs</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
             <header className="flex justify-between items-center p-3 pb-1">
                 <span onClick={() => router.push('/')} className="cursor-pointer">
                 <Icon name="description" size="5xl" color="blue"/>
